@@ -1,4 +1,9 @@
-incremental_mining
+Incremental Mining
 ==================
 
-incremental_game
+Made with :
+* Angular JS
+* Twitter Bootstrap
+* Browserify
+* NodeJS
+* Bower
