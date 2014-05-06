@@ -1,23 +1,34 @@
 {
-    "name": "angular-express-gulp-seed",
-    "version": "0.0.0",
-    "description": "",
-    "main": "gulpfile.js",
-    "scripts": {
-	"postinstall" : "bower install",
-	"test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "author": "David Barrutia",
-    "license": "ISC",
-    "devDependencies": {
-	"debowerify": "^0.7.0",
-	"gulp": "^3.6.2",
-	"gulp-browserify": "^0.5.0",
-	"gulp-livereload": "^1.3.1",
-	"gulp-notify": "^1.2.5",
-	"gulp-rename": "^1.2.0",
-	"gulp-ruby-sass": "^0.4.3",
-	"gulp-watch": "^0.6.2",
-	"underscore": "^1.6.0"
-    }
+  "name": "angular-express-gulp-seed",
+  "version": "0.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "postinstall": "bower install",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "David Barrutia",
+  "license": "ISC",
+  "devDependencies": {
+    "debowerify": "^0.7.0",
+    "gulp": "^3.6.2",
+    "gulp-browserify": "^0.5.0",
+    "gulp-concat": "^2.2.0",
+    "gulp-livereload": "^1.3.1",
+    "gulp-nodemon": "^1.0.2",
+    "gulp-notify": "^1.2.5",
+    "gulp-rename": "^1.2.0",
+    "gulp-ruby-sass": "^0.4.3",
+    "gulp-util": "^2.2.14",
+    "gulp-watch": "^0.6.2",
+    "underscore": "^1.6.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.0.2",
+    "express": "^4.1.1",
+    "jade": "^1.3.1",
+    "method-override": "^1.0.0",
+    "mongoose": "^3.8.8",
+    "morgan": "^1.0.1"
+  }
 }

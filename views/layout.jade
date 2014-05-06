@@ -1,0 +1,12 @@
+doctype html
+html
+  head
+    meta(charset='utf8')
+    base(href='/')
+    title= title
+    link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap.css')
+    link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap-theme.css')
+    link(rel='stylesheet', href='/public/dist/style.css')
+  body(ng-app="myApp")
+    block body
+    script(src='/public/dist/app.js')

@@ -1,43 +1,69 @@
 var gulp	= require("gulp");
+var gutil	= require("gulp-util");
 var browserify	= require("gulp-browserify");
 var path	= require("path");
 var rename	= require("gulp-rename");
 var watch	= require("gulp-watch");
 var notify	= require("gulp-notify");
+var nodemon     = require("gulp-nodemon");
+var sass	= require("gulp-ruby-sass");
+var concat      = require("gulp-concat");
+var livereload	= require("gulp-livereload");
 
-var file_to_browserify = 'views/js/app.js';
-var files_to_watch_for_browserify = "views/js/**/*.js";
-var browseried_file_dest = "public/dist";
 
 function handleErrors() {
-    // Send error to notification center with gulp-notify
     notify.onError({
 	title: "Compile Error",
 	message: "<%= error.message %>"
     }).apply(this, arguments);
-
-    // Keep gulp from hanging on this task
     this.emit('end');
 };
 
 gulp.task('browserify', function() {
-    gulp.src(path.resolve(file_to_browserify))
+    gulp.src(path.resolve('public/js/app.js'))
         .pipe(browserify({
 	    transform : ['debowerify'],
             insertGlobals : true,
             debug : true
         }))
-	.on("error", handleErrors)
-	.pipe(notify("Browserify Success"))
-        .pipe(gulp.dest(path.resolve(browseried_file_dest)));
+	.on("error", handleErrors).on("error", gutil.log)
+        .pipe(gulp.dest('public/dist'));
+});
+
+gulp.task('css', function () {
+    return gulp.src("public/css/**/*.scss")
+        .pipe(sass({sourcemap: false}))
+	.on("error", function(){
+	    console.log("PWET");
+	    notify("SASS ERROR");
+	}).on("error", gutil.log)
+    	// .pipe(concat('style.css'))
+        .pipe(gulp.dest("public/dist"));
 });
 
 gulp.task("watch", function(){
-    watch({glob: files_to_watch_for_browserify }, function(){
+    var server = livereload();
+    
+    watch({glob: "public/js/**/*.js" }, function(files){
 	gulp.start("browserify");
     });
 
-    // watch({glob: files_to_copy}, function(){
-    // 	gulp.start("copy");
-    // });
+    watch({glob: "public/css/**/*.scss" }, function(files){
+	gulp.start("css");
+    });
+
+    gulp.watch(['public/dist/**', 'views/**']).on('change', function(file) {
+	server.changed(file.path);
+    });
+
 });
+
+gulp.task("nodemon", function(){
+     nodemon({ script: "index.js", ext: 'js', ignore: ['bower_components/**/*.js', 'public/**/*.js', 'gulpfile.js'] })
+	.on('restart', function () {
+	    console.log('restarted!');
+	});
+});
+
+gulp.task("build", ['css', 'browserify']);
+gulp.task("dev", ["nodemon", "watch"]);

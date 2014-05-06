@@ -1,3 +1,1 @@
-// var app = require("./app");
-
-console.log("Hello World!");
+var app = require("./lib/express");
