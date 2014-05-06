@@ -5,25 +5,9 @@ var rename	= require("gulp-rename");
 var watch	= require("gulp-watch");
 var notify	= require("gulp-notify");
 
-
-
-var file_to_browserify = 'app/js/app.js';
-var files_to_watch_for_browserify = "app/js/*.js";
-var browseried_file_dest = "build/js";
-
-var files_to_copy = [
-    "app/index.html",
-    "app/img/**",
-    "app/css/**",
-    "app/partials/**"
-];
-
-var dest_folders = [
-    "build/",
-    "build/img",
-    "build/css",
-    "build/partials"
-];
+var file_to_browserify = 'views/js/app.js';
+var files_to_watch_for_browserify = "views/js/**/*.js";
+var browseried_file_dest = "public/dist";
 
 function handleErrors() {
     // Send error to notification center with gulp-notify
@@ -48,20 +32,12 @@ gulp.task('browserify', function() {
         .pipe(gulp.dest(path.resolve(browseried_file_dest)));
 });
 
-
-gulp.task('copy', function() {
-    for (var i = 0; i < files_to_copy.length; i++){
-	gulp.src(files_to_copy[i])
-	    .pipe(gulp.dest(dest_folders[i]));
-    }
-});
-
 gulp.task("watch", function(){
     watch({glob: files_to_watch_for_browserify }, function(){
 	gulp.start("browserify");
     });
 
-    watch({glob: files_to_copy}, function(){
-	gulp.start("copy");
-    });
+    // watch({glob: files_to_copy}, function(){
+    // 	gulp.start("copy");
+    // });
 });
