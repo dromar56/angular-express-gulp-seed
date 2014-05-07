@@ -16,7 +16,6 @@ function handleErrors() {
 	title: "Compile Error",
 	message: "<%= error.message %>"
     }).apply(this, arguments);
-    this.emit('end');
 };
 
 gulp.task('browserify', function() {
@@ -33,17 +32,13 @@ gulp.task('browserify', function() {
 gulp.task('css', function () {
     return gulp.src("public/css/**/*.scss")
         .pipe(sass({sourcemap: false}))
-	.on("error", function(){
-	    console.log("PWET");
-	    notify("SASS ERROR");
-	}).on("error", gutil.log)
-    	// .pipe(concat('style.css'))
+	.on("error", handleErrors).on("error", gutil.log)
         .pipe(gulp.dest("public/dist"));
 });
 
 gulp.task("watch", function(){
     var server = livereload();
-    
+
     watch({glob: "public/js/**/*.js" }, function(files){
 	gulp.start("browserify");
     });
@@ -59,7 +54,7 @@ gulp.task("watch", function(){
 });
 
 gulp.task("nodemon", function(){
-     nodemon({ script: "index.js", ext: 'js', ignore: ['bower_components/**/*.js', 'public/**/*.js', 'gulpfile.js'] })
+    nodemon({ script: "index.js", ext: 'js', ignore: ['bower_components/**/*.js', 'public/**/*.js', 'gulpfile.js'] })
 	.on('restart', function () {
 	    console.log('restarted!');
 	});

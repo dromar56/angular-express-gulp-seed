@@ -1,4 +1,4 @@
 app.controller('homeController', ['$scope', function($scope){
-    $scope.name = "Bouh";
+    $scope.name = "Hello There";
 }]);
 
