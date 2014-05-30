@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "David Barrutia",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "debowerify": "^0.7.0",
     "gulp": "^3.6.2",
