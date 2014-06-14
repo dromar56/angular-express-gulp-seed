@@ -1,4 +1,4 @@
-Incremental Mining
+angular-express-gulp-seed
 ==================
 
 Made with :
@@ -7,3 +7,6 @@ Made with :
 * Browserify
 * NodeJS
 * Bower
+* SASS/SCSS
+* Jade
+* Gulp
